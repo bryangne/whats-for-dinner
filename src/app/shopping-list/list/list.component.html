@@ -1,0 +1,7 @@
+<mat-card class="card">
+    <h1>Grocery List</h1>
+    <mat-action-row><button mat-button color="primary" (click)="openAddEditModal()">Add</button></mat-action-row>
+    <div *ngFor="let item of items">
+        <app-list-item [item]=item></app-list-item>
+    </div>
+</mat-card>

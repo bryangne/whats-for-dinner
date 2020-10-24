@@ -1,0 +1,17 @@
+<mat-accordion multi>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{ item.name }}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+            {{ item.details }}
+            Amount: {{ item.amount }}
+        </p>
+        <mat-action-row>
+            <button mat-button color="primary" (click)="onEdit()">Edit</button>
+            <button mat-button color="danger" (click)="onDelete()">Delete</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+</mat-accordion>

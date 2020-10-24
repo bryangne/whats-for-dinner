@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{addMode ? 'Add Grocery' : 'Edit Grocery'}}</h2>
+<form [formGroup]="modalForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput formControlName="nameText" [(ngModel)]="name">
+            <mat-error *ngIf="modalForm.get('nameText').touched">Please enter a name</mat-error>
+            <mat-error *ngIf="modalForm.get('nameText').invalid"></mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input type="text" matInput formControlName="descText" [(ngModel)]="details">
+            <mat-error *ngIf="modalForm.get('descText').touched">Please enter a description</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input type="number" matInput formControlName="amountNum" min="0" [(ngModel)]="amount">
+            <mat-error *ngIf="modalForm.get('amountNum').touched && !modalForm.get('amountNum').hasError('min')">Please enter an amount</mat-error>
+            <mat-error *ngIf="modalForm.get('amountNum').hasError('min')">Invalid amount of items</mat-error>
+            
+            
+        </mat-form-field>
+    </p>
+    <mat-action-row>
+        <button type="submit" mat-button color="primary" [disabled]="!modalForm.valid">
+            {{addMode ? 'Add' : 'Edit'}}
+        </button>
+    </mat-action-row>
+</form>
