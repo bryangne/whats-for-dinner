@@ -128,5 +128,10 @@
       }
     }
   },
-  "defaultProject": "whats-for-dinner"
+  "defaultProject": "whats-for-dinner",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
