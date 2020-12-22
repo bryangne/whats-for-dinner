@@ -9,6 +9,8 @@
             {{ item.details }}
             Amount: {{ item.amount }}
         </p>
+        <img *ngIf="item.imageURL" src="{{item.imageURL}}" />
+        <img *ngIf="!item.imageURL" src="assets/No_Image_Available.jpg"/>
         <mat-action-row>
             <button mat-button color="primary" (click)="onEdit()">Edit</button>
             <button mat-button color="danger" (click)="onDelete()">Delete</button>

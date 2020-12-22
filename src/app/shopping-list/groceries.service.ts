@@ -33,7 +33,7 @@ export class GroceriesService {
         });
         console.log(this.items)
         this.itemsChanged.next([...this.items]);
-      });
+      }, err => console.log(err));
   }
 
   // clear out the subscription before logging out
@@ -60,7 +60,10 @@ export class GroceriesService {
     return new Promise<any>((resolve, reject) => {
       this.firestore.collection('users').doc(uid)
         .collection('groceries').doc(item.id)
-        .set({ name: item.name, details: item.details, amount: item.amount })
+        .set({ name: item.name, foodId: item.foodId, nutrients: item.nutrients, amount: item.amount })
+        .then(res => {
+          console.log(res)
+        }, err => reject(err))
     })
   }
 
@@ -68,7 +71,10 @@ export class GroceriesService {
     const uid = this.authService.getID()
     return new Promise<any>((resolve, reject) => {
       this.firestore.collection('users').doc(uid)
-        .collection('groceries').doc(id).delete();
+        .collection('groceries').doc(id).delete()
+        .then(res => {
+          console.log(res)
+        }, err => reject(err))
     })
   }
 }

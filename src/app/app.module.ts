@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,9 @@ import { RegisterComponent } from './authentication/register/register.component'
 import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { AuthService } from './authentication/auth.service';
 import { GroceriesService } from './shopping-list/groceries.service';
+import { GroceryBackendService } from './backend-services/grocery-backend.service';
+import { GrocerySearchComponent } from './shopping-list/grocery-search/grocery-search.component';
+import { GroceryResultsComponent } from './grocery-results/grocery-results.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectFromLogin = () => redirectLoggedInTo(['shoppinglist'])
@@ -37,7 +41,9 @@ const appRoutes: Routes = [
     data: {authGuardPipe: redirectFromLogin} },
   { path: 'shoppinglist', component: ListComponent,
     canActivate: [AngularFireAuthGuard],
-    data: {authGuardPipe: redirectUnauthorizedToLogin} }
+    data: {authGuardPipe: redirectUnauthorizedToLogin} },
+  { path: 'search/groceries/:item', component: GroceryResultsComponent,
+    canActivate: [AngularFireAuthGuard], data: {authGuardPipe: redirectUnauthorizedToLogin} },
 ];
 
 @NgModule({
@@ -48,10 +54,13 @@ const appRoutes: Routes = [
     AddEditModalComponent,
     ToolbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GrocerySearchComponent,
+    GroceryResultsComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
@@ -64,7 +73,7 @@ const appRoutes: Routes = [
   ],
   entryComponents: [AddEditModalComponent],
   exports: [],
-  providers: [AngularFireAuthGuard, AuthService, GroceriesService],
+  providers: [AngularFireAuthGuard, AuthService, GroceriesService, GroceryBackendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

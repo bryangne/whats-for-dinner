@@ -1,7 +1,9 @@
 <mat-card class="card">
     <button (click)="logout()">Logout</button>
     <h1>Grocery List</h1>
-    <mat-action-row><button mat-button color="primary" (click)="openAddEditModal()">Add</button></mat-action-row>
+    <mat-action-row>
+        <app-grocery-search></app-grocery-search>
+    </mat-action-row>
     <div *ngFor="let item of items">
         <app-list-item [item]=item></app-list-item>
     </div>

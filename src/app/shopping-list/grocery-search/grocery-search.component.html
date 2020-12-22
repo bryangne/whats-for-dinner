@@ -1,0 +1,14 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <div class="flex-container">
+    <mat-form-field>
+      <mat-label>Search Groceries</mat-label>
+      <input matInput type="text" class="fill-width" formControlName="searchText" [(ngModel)]="search" [matAutocomplete]="auto" (keyup)="onKeySearch($event)">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let item of searchList" [value]="item">
+          {{item}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-button type="submit" color="primary" [disabled]="search === ''">Search</button>
+  </div>
+</form>

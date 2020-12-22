@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "whats-for-dinner-62dae.appspot.com",
     messagingSenderId: "426467011376",
     appId: "1:426467011376:web:922a9aead4fb428e4236f5"
-  }
+  },
+  edamamAPI: "http://localhost:5001/whats-for-dinner-62dae/us-central1/api/"
 };
 
 /*

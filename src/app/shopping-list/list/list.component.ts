@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { AddEditModalComponent } from '../add-edit-modal/add-edit-modal.component';
 import { AuthService } from 'src/app/authentication/auth.service';
 import { Router } from '@angular/router';
+import { FoodSearchService } from 'src/app/edamam/food-search.service';
 
 @Component({
   selector: 'app-list',
@@ -13,26 +14,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./list.component.css']
 })
 
-// export interface dialogData {
-//   item?: Item
-
-// }
-
 export class ListComponent implements OnInit, OnDestroy {
   items: Item[] = [];
   private itemSub: Subscription;
   // tslint:disable-next-line: max-line-length
   constructor(private groceriesService: GroceriesService, private authService: AuthService, public dialog: MatDialog, private router: Router) { }
-
+  // TODO: remove foodsearchservice later after testing
   ngOnInit(): void {
     // subscribe to the grocery items only when the grocery service connects with the database
-    this.subscribeToGroceryList()
+    this.subscribeToGroceryList();
   }
 
   async subscribeToGroceryList() {
     // if the groceries service has not yet connected to the database, do so
-    console.log('no grocery list yet')
-    await this.groceriesService.subscribeAfterAuth()
+    console.log('no grocery list yet');
+    await this.groceriesService.subscribeAfterAuth();
     this.itemSub = this.groceriesService.itemsChanged.subscribe(
       (items: Item[]) => {
         this.items = items;
@@ -63,16 +59,16 @@ export class ListComponent implements OnInit, OnDestroy {
   logout() {
     // only unsubscribe when the grocery subscription has been made successfully
     if (this.groceriesService.grocerySubscription) {
-      this.itemSub.unsubscribe()
+      this.itemSub.unsubscribe();
     }
     // clear out the grocery service db sub before logging out
-    this.groceriesService.clearSubOnLogout()
+    this.groceriesService.clearSubOnLogout();
     // log out of the auth service and navigate user to the login page
     this.authService.logout().then(res => {
-      this.router.navigate(['login'])
+      this.router.navigate(['login']);
     }, err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   }
 
 }

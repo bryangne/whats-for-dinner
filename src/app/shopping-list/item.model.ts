@@ -1,6 +1,8 @@
 export interface Item {
     id?: string;
+    foodId: string;
     name: string;
-    details: string;
+    nutrients: {};
+    imageURL?: string;
     amount: number;
 }

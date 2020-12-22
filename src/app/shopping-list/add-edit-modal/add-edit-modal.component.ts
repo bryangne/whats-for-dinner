@@ -38,7 +38,9 @@ export class AddEditModalComponent implements OnInit {
     // cast item into any so that id can be added simply by setting item.id
     const item: any = {name: this.name, details: this.details, amount: this.amount};
     if (this.addMode) {
-      this.groceriesService.addGrocery(item).then(res => { });
+      this.groceriesService.addGrocery(item).then(res => {
+        // Do something after adding a grocery if necessary
+      });
     } else if (!this.addMode) {
       item.id = this.id;
       this.groceriesService.updateGrocery(item).then(res => { });
